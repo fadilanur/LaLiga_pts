@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ModelSports> sportsArrayList;
 
     private Button buttonFavorite;
+    private ArrayList<Object> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getData(){
-        AndroidNetworking.get("https://www.thesportsdb.com/api/v1/json/2/all_leagues.php")
+        AndroidNetworking.get("https://www.thesportsdb.com/api/v1/json/2/search_all_teams.php?s=Soccer&c=Spain")
                 .addPathParameter("pageNumber", "0")
                 .addQueryParameter("limit", "3")
                 .addHeaders("token", "1234")
@@ -64,14 +68,14 @@ public class MainActivity extends AppCompatActivity {
                         sportsArrayList = new ArrayList<>();
 
                         try {
-                            JSONArray jsonArray = response.getJSONArray("leagues");
+                            JSONArray jsonArray = response.getJSONArray("teams");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String nama = jsonObject.getString("strLeague");
-                                String diskripsi = jsonObject.getString("strSportDescription");
-                                String image = jsonObject.getString("strLeagueAlternate");
+                                String nama = jsonObject.getString("strTeam");
+                                String diskripsi = jsonObject.getString("strDescriptionEN");
+                                String image = jsonObject.getString("strTeamBadge");
 
                                 sportsArrayList.add(new ModelSports(image,nama, diskripsi));
                             }

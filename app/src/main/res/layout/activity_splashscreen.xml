@@ -11,6 +11,6 @@
         android:layout_width="392dp"
         android:layout_height="577dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/logopremier" />
+        android:src="@drawable/logo_laliga" />
 
 </RelativeLayout>
