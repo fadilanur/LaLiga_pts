@@ -68,7 +68,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            image = itemView.findViewById(R.id.imageSports);
+            image = itemView.findViewById(R.id.image);
             nama = itemView.findViewById(R.id.tvNamaSports);
             deskripsi = itemView.findViewById(R.id.tvDeskripsiSports);
             cardView = itemView.findViewById(R.id.cardview);

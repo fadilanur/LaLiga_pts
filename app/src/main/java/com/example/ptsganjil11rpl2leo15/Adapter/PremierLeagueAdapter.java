@@ -12,12 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ptsganjil11rpl2leo15.Model.ModelSports;
 import com.example.ptsganjil11rpl2leo15.R;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportViewHolder> {
+public class PremierLeagueAdapter extends RecyclerView.Adapter<PremierLeagueAdapter.SportViewHolder> {
 
     private ArrayList<ModelSports> listModelSport;
     private Callback callback;
@@ -26,21 +25,21 @@ public class SportAdapter extends RecyclerView.Adapter<SportAdapter.SportViewHol
         void onClick(int position);
     }
 
-    public SportAdapter(ArrayList<ModelSports> sportsArrayList, Callback callback) {
+    public PremierLeagueAdapter(ArrayList<ModelSports> sportsArrayList, Callback callback) {
         this.listModelSport = sportsArrayList;
         this.callback = callback;
     }
 
     @NonNull
     @Override
-    public SportAdapter.SportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PremierLeagueAdapter.SportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_list, parent, false);
         return new SportViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SportAdapter.SportViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PremierLeagueAdapter.SportViewHolder holder, int position) {
 
         holder.nama.setText(listModelSport.get(position).getNama());
         holder.deskripsi.setText(listModelSport.get(position).getDeskripsi());

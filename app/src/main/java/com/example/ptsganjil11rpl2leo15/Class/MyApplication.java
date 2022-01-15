@@ -12,7 +12,7 @@ public class MyApplication extends Application {
 
         Realm.init(this);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .name("SportRealm.db")
+                .name("PremierLeagueRealm.db")
                 .schemaVersion(0)
                 .build();
         Realm.setDefaultConfiguration(configuration);

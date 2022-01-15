@@ -8,13 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.ptsganjil11rpl2leo15.Adapter.SportAdapter;
+import com.example.ptsganjil11rpl2leo15.Adapter.PremierLeagueAdapter;
 import com.example.ptsganjil11rpl2leo15.Model.ModelSports;
 
 import org.json.JSONArray;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private SportAdapter sportAdapter;
+    private PremierLeagueAdapter sportAdapter;
     private ArrayList<ModelSports> sportsArrayList;
 
     private Button buttonFavorite;
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getData(){
-        AndroidNetworking.get("https://www.thesportsdb.com/api/v1/json/2/all_sports.php")
+        AndroidNetworking.get("https://www.thesportsdb.com/api/v1/json/2/all_leagues.php")
                 .addPathParameter("pageNumber", "0")
                 .addQueryParameter("limit", "3")
                 .addHeaders("token", "1234")
@@ -65,14 +64,14 @@ public class MainActivity extends AppCompatActivity {
                         sportsArrayList = new ArrayList<>();
 
                         try {
-                            JSONArray jsonArray = response.getJSONArray("sports");
+                            JSONArray jsonArray = response.getJSONArray("leagues");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                String nama = jsonObject.getString("strSport");
+                                String nama = jsonObject.getString("strLeague");
                                 String diskripsi = jsonObject.getString("strSportDescription");
-                                String image = jsonObject.getString("strSportThumb");
+                                String image = jsonObject.getString("strLeagueAlternate");
 
                                 sportsArrayList.add(new ModelSports(image,nama, diskripsi));
                             }
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        sportAdapter = new SportAdapter(sportsArrayList, new SportAdapter.Callback() {
+                        sportAdapter = new PremierLeagueAdapter(sportsArrayList, new PremierLeagueAdapter.Callback() {
                             @Override
                             public void onClick(int position) {
                                 Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
